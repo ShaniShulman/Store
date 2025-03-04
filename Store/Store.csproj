@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\Options.html" />
+    <Compile Remove="wwwroot\View\**" />
+    <Content Remove="wwwroot\View\**" />
+    <EmbeddedResource Remove="wwwroot\View\**" />
+    <None Remove="wwwroot\View\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,13 +41,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DTO\DTO.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Image\" />
-    <Folder Include="wwwroot\Script\" />
-    <Folder Include="wwwroot\Style\" />
-    <Folder Include="wwwroot\View\" />
   </ItemGroup>
 
   <ItemGroup>

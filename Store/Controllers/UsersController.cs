@@ -47,20 +47,20 @@ namespace Store.Controllers
             User user = await _iuserservice.PostLoginS(username, password);
             GetUserDTO userDTO=_imapper.Map<User,GetUserDTO>(user);
             if (userDTO != null) {
-                _logger.LogCritical($"Login with user name - {username} and password - {password}");
+                _logger.LogInformation($"Login with user name - {username} and password - {password}");
                 return Ok(userDTO);
             }
             return NoContent();
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> PostNewUser([FromBody] UserDTO user)
+        public async Task<ActionResult<GetUserDTO>> PostNewUser([FromBody] UserDTO user)
         {
             User user1 = _imapper.Map<UserDTO, User>(user);
             User newUser =  await _iuserservice.Post(user1);
             if (newUser == null)
                 return BadRequest();
-            UserDTO newUserDTO = _imapper.Map<User, UserDTO>(newUser);
+            GetUserDTO newUserDTO = _imapper.Map<User,GetUserDTO >(newUser);
             if (newUserDTO != null)
                 return Ok(newUserDTO);
                 //return CreatedAtAction(nameof(GetById),new { id = newUser.Id }, newUser);

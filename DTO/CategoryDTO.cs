@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DTO
 {
-
-    public record GetCategoryDTO(int Id,string CategoryName);
+    public record GetCategoryDTO(int Id, string CategoryName);
     public record CategoryDTO(string CategoryName);
-
-
 }

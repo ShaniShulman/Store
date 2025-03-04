@@ -3,20 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="./user.css" rel="stylesheet"/>
-    <script defer src="./user.js"></script>
+    <link href="Style/user.css" rel="stylesheet" />
+    <script defer src="Script/user.js"></script>
 </head>
 <body dir="rtl">
-    <div>name</div>
-    <input id="nameInput" />
-    <div>password</div>
-    <input id="passwordInput" type="password" />
-    <br />
-    <button onclick="login()">send</button>
-
-    <br />
-    <button onclick="newUser()">new user</button>
-    <div class="container">
+    <div id="background">
+        <div>name</div>
+        <input id="nameInput" />
+        <div>password</div>
+        <input id="passwordInput" type="password" />
+        <br />
+        <button onclick="login()">send</button>
+        <br />
+        <button onclick="newUser()">new user</button>
+    </div>
+    <div id="background" class="container">
         <div>user name</div>
         <input id="username" />
         <div>password</div>
@@ -27,7 +28,6 @@
         <div>last name</div>
         <input id="lastname" />
         <button onclick="register()">register</button>
-
     </div>
 </body>
 </html>

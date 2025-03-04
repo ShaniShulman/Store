@@ -2,10 +2,10 @@
 using DTO;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Services;
 using System.Collections.Generic;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Threading.Tasks;
 
 namespace Store.Controllers
 {
@@ -13,28 +13,41 @@ namespace Store.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        ICategoryService _icategoryService;
-        IMapper _imapper;
-        public CategoriesController(ICategoryService icategoryService, IMapper imapper)
+        private readonly ICategoryService _icategoryService;
+        private readonly IMapper _imapper;
+        private readonly IMemoryCache _cache;
+        private static readonly string CacheKey = "categoriesCacheKey";
+        private static readonly TimeSpan CacheDuration = TimeSpan.FromMinutes(10);
+
+        public CategoriesController(ICategoryService icategoryService, IMapper imapper, IMemoryCache cache)
         {
             _icategoryService = icategoryService;
             _imapper = imapper;
+            _cache = cache;
         }
 
         // GET: api/<CategoriesController>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetCategoryDTO>>> Get()
         {
+            if (!_cache.TryGetValue(CacheKey, out IEnumerable<GetCategoryDTO> categoriesDTO))
+            {
+                IEnumerable<Category> categories = await _icategoryService.Get();
+                categoriesDTO = _imapper.Map<IEnumerable<Category>, IEnumerable<GetCategoryDTO>>(categories);
 
-            IEnumerable<Category>categories= await _icategoryService.Get();
-            IEnumerable<GetCategoryDTO> categoriesDTO =_imapper.Map< IEnumerable <Category> ,IEnumerable <GetCategoryDTO>>(categories);
+                var cacheEntryOptions = new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = CacheDuration,
+                    SlidingExpiration = TimeSpan.FromMinutes(5)
+                };
+
+                _cache.Set(CacheKey, categoriesDTO, cacheEntryOptions);
+            }
+
             if (categoriesDTO != null)
-                 return Ok(categoriesDTO);
-            else return NoContent();
-               
+                return Ok(categoriesDTO);
+            else
+                return NoContent();
         }
-
     }
-
-     
 }

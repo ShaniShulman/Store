@@ -9,11 +9,10 @@ namespace TestProject
         public DataBaseFixture()
         {
             var options = new DbContextOptionsBuilder<ManagerApiContext>()
-            .UseSqlServer("Server=srv2\\pupils;Database=Tests;Trusted_Connection=True;")
+            .UseSqlServer("Server=srv2\\pupils;Database=Test_shani;Trusted_Connection=True;TrustServerCertificate=True")
             .Options;
             Context = new ManagerApiContext(options);
             Context.Database.EnsureCreated();
-
         }
 
         public void Dispose()

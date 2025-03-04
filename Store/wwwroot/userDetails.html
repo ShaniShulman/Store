@@ -3,21 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="./user.css" rel="stylesheet" />
-    <script defer src="./user.js"></script>
+    <link href="Style/user.css" rel="stylesheet" />
+    <script defer src="Script/user.js"></script>
 </head>
 <body>
-        <!--<button onclick="seeTheUpdateUser()">update detailes</button>-->
-        <div class="containerOfUpdate">
-            <div>user name</div>
-            <input id="usernameOnUpdate" />
-            <div>password</div>
-            <input id="passwordOnUpdate" type="password" />
-            <div>first name</div>
-            <input id="firstnameOnUpdate" />
-            <div>last name</div>
-            <input id="lastnameOnUpdate" />
-            <button onclick="updateUser()">update</button>
-        </div>
+    <div id="background" class="containerOfUpdate">
+        <div>user name</div>
+        <input id="usernameOnUpdate" />
+        <div>password</div>
+        <input id="password2" type="password" onblur="checkScore()" />
+        <progress id="score" value="0" max="4"></progress>
+        <div>first name</div>
+        <input id="firstnameOnUpdate" />
+        <div>last name</div>
+        <input id="lastnameOnUpdate" />
+        <button onclick="updateUser()">update</button>
+        <button onclick="logOut()">Log Out</button>
+    </div>
 </body>
 </html>

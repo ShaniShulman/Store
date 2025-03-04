@@ -12,7 +12,6 @@ namespace Store.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-
         IProductService _iproductService;
         IMapper _imapper;
       
@@ -28,15 +27,11 @@ namespace Store.Controllers
         {
             IEnumerable<Product>products= await _iproductService.Get( position,  skip, desc, minPrice,  maxPrice, categoryIds);
             IEnumerable<ProductDTO>productsDTO=_imapper.Map<IEnumerable<Product>,IEnumerable<ProductDTO>>(products);
-            if (productsDTO == null)
+            if (productsDTO == null) 
                 return NoContent();
             else
-                return Ok(productsDTO);
+                return Ok(productsDTO);         
         }
-
-      
-
-      
 
     }
 }
