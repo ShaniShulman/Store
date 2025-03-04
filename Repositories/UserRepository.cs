@@ -22,8 +22,8 @@ namespace Repositories
         }
         public async Task<User> PostLoginR(string username, string password)
         {
-           User user = await _managerApiContext.Users.FirstOrDefaultAsync(u=>u.UserName==username&& u.Password==password);
-            return user;
+           return await _managerApiContext.Users.FirstOrDefaultAsync(u=>u.UserName==username&& u.Password==password);
+             
         }
         public async Task<User> Post(User user)
         {
