@@ -9,5 +9,6 @@ namespace Services
         Task<User> Post(User user);
         Task<User> PostLoginS(string username, string password);
         Task<User> Put(int id, User user);
+        Task<User> CheckIfUserExist( User user);
     }
 }

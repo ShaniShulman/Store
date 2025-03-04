@@ -38,5 +38,10 @@ namespace Repositories
             await _managerApiContext.SaveChangesAsync();
           return user.Entity;
         }
+
+         public async Task<User> CheckIfUserExist(User user)
+        {
+            return await _managerApiContext.Users.FirstOrDefaultAsync(u => u.UserName == user.UserName);
+        }
     }
 }

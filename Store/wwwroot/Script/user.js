@@ -86,8 +86,10 @@ const register = async () => {
             },
             body: JSON.stringify(user)
         });
-
-        if (postFromData.status === 404) {
+        if (postFromData.status == 409) {
+            alert("duplicate user")
+        }
+        else if (postFromData.status === 404) {
             alert('all fields are required');
         } else if (postFromData.status === 400) {
             alert('your password is not strong enough');
@@ -141,9 +143,8 @@ const updateUser = async () => {
             },
             body: JSON.stringify(user)
         });
-
-        if (updateFromData.status === 400) {
-            alert('your password is not strong enough');
+         if (updateFromData.status === 400) {
+              alert('your password is not strong enough');
         } else if (updateFromData.status === 404) {
             alert('all fields are required');
         } else {

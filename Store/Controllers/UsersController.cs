@@ -57,13 +57,14 @@ namespace Store.Controllers
         public async Task<ActionResult<GetUserDTO>> PostNewUser([FromBody] UserDTO user)
         {
             User user1 = _imapper.Map<UserDTO, User>(user);
+            if(await _iuserservice.CheckIfUserExist(user1)!=null)
+                return Conflict();
             User newUser =  await _iuserservice.Post(user1);
             if (newUser == null)
                 return BadRequest();
             GetUserDTO newUserDTO = _imapper.Map<User,GetUserDTO >(newUser);
             if (newUserDTO != null)
                 return Ok(newUserDTO);
-                //return CreatedAtAction(nameof(GetById),new { id = newUser.Id }, newUser);
             return NoContent();
 
         }

@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Repositories;
 using Zxcvbn;
 
@@ -43,6 +44,12 @@ namespace Services
             if (result <= 3)
                 return null;
             return await _iuserRepository.Put(id, user);
+        }
+
+
+        public async Task<User> CheckIfUserExist(User user)
+        {
+            return await _iuserRepository.CheckIfUserExist(user);
         }
     }
 }
